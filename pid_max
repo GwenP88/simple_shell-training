@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ -f /proc/sys/kernel/pid_max ] && [ -r /proc/sys/kernel/pid_max ]
+then
+cat /proc/sys/kernel/pid_max 
+exit 0
+else
+echo "Impossible de lire /proc/sys/kernel/pid_max : fichier absent ou non lisible" 
+exit 1
+fi
