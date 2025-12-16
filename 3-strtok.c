@@ -4,10 +4,11 @@
 #include <stdio.h>
 #include <string.h>
 
+char **empty_array(void);
+
 char **split_string (char *string)
 {
-	char *str1, *str2;
-	char *token;
+	char *str1, *str2, *token;
 	const char *separator; 
 	char **tokens;
 	size_t count, i, j;
@@ -23,15 +24,8 @@ char **split_string (char *string)
 	
 	if (*str1 == '\0')
 	{
-		tokens = malloc(sizeof(char *));
-		if (tokens == NULL)
-		{
-			free (str1);
-			return (NULL);
-		}
-		tokens[0] = NULL;
-		free (str1);
-		return (tokens);
+		free(str1);
+		return empty_array();
 	}
 
 	count = 0;
@@ -44,15 +38,8 @@ char **split_string (char *string)
 
 	if (count == 0)
 	{
-		tokens = malloc(sizeof(char *));
-		if (tokens == NULL)
-		{
-			free (str1);
-			return (NULL);
-		}
-		tokens[0] = NULL;
-		free (str1);
-		return (tokens);
+		free(str1);
+		return empty_array();
 	}
 	free (str1);
 
@@ -86,4 +73,14 @@ char **split_string (char *string)
 	tokens[i] = NULL;
 	free (str2);
 	return (tokens);
+}
+
+char **empty_array(void)
+{
+	char **array;
+	array = malloc(sizeof(char *));
+	if (array == NULL)
+		return (NULL);
+	array[0] = NULL;
+	return (array);
 }
