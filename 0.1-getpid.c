@@ -10,12 +10,12 @@
 int main(void)
 {
 	/* Variable pour stocker le PID du processus courant */
-    pid_t my_pid;
+	pid_t my_pid;
 
 	/* Récupère le PID du processus courant */
-    my_pid = getpid();
+	my_pid = getpid();
 	/* Affiche le PID */
-    printf("%u\n", my_pid);
+	printf("%u\n", my_pid);
 	/* Fin normale du programme */
-    return (0);
+	return (0);
 }
