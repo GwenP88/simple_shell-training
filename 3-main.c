@@ -1,7 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "main.h"
 
-char **split_string(char *string);
+/**
+ * main - tests split_string by printing each token from a given input string
+ * @argc: number of arguments passed to the program
+ * @argv: array of strings containing the program arguments
+ *
+ * Return: 0 on success, 1 on error.
+ */
 
 int main(int argc, char **argv)
 {
