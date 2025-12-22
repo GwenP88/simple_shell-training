@@ -107,7 +107,6 @@ char **split_string(char *string)
 	return (tokens);
 }
 
-
 /**
  * empty_array - allocate and return
  * an empty NULL-terminated array of strings
@@ -119,9 +118,14 @@ char **empty_array(void)
 {
 	char **array;
 
+	/* Alloue un tableau contenant 1 seul élément (le NULL de fin) */
 	array = malloc(sizeof(char *));
+	/* Si l'allocation échoue, on renvoie NULL */
 	if (array == NULL)
 		return (NULL);
+
+	/* Termine le tableau par NULL pour représenter un tableau vide */
 	array[0] = NULL;
+	/* Retourne le tableau vide */
 	return (array);
 }
