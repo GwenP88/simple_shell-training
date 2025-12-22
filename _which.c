@@ -1,6 +1,73 @@
-#include "shell.h"
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
 
+char *find_in_path(const char *cmd, char *path_env);
 
+/**
+ * main - entry point for a simple _which clone
+ * @ac: number of arguments passed to the program
+ * @av: array of strings containing the arguments
+ *
+ * Return: 0 if all commands are found, 1 if at least one command is not found,
+ *	or 1 if the usage is incorrect (no command provided).
+ */
+
+int main(int ac, char **av)
+{
+	int i, status;
+	char *path_env, *found_path;
+
+	if (ac < 2)
+	{
+		printf("Usage: ./_which filename ...\n");
+		return (1);
+	}
+
+	path_env = getenv("PATH");
+	i = 1;
+	status = 0;
+	while (av[i])
+	{
+		if (strchr(av[i], '/') == NULL)
+		{
+			found_path = find_in_path(av[i], path_env);
+			if (found_path != NULL)
+			{
+				printf("%s\n", found_path);
+				free(found_path);
+			}
+			else
+			{
+				printf("%s: command not found\n", av[i]);
+				status = 1;
+			}
+		}
+		else
+		{
+			if (access(av[i], X_OK) == 0)
+				printf("%s\n", av[i]);
+			else
+			{
+				printf("%s: command not found\n", av[i]);
+				status = 1;
+			}
+		}
+		i++;
+	}
+	return (status);
+}
+
+/**
+ * find_in_path - searches for a command in PATH directories
+ * @cmd: command name to search for (without path)
+ * @path_env: PATH environment variable content (colon-separated directories)
+ *
+ * Return: a newly allocated string containing
+ *	the full executable path if found,
+ *	or NULL if not found or on allocation error.
+ */
 
 char *find_in_path(const char *cmd, char *path_env)
 {
@@ -26,7 +93,7 @@ char *find_in_path(const char *cmd, char *path_env)
 		seg_len = seg_current - seg_start;
 		if (seg_len == 0)
 		{
-			candidate_path = malloc((cmd_len + 3);
+			candidate_path = malloc(cmd_len + 3);
 			if (candidate_path == NULL)
 				return (NULL);
 			candidate_path[0] = '.';
@@ -34,12 +101,11 @@ char *find_in_path(const char *cmd, char *path_env)
 			strcpy(candidate_path + 2, cmd);
 			if (access(candidate_path, X_OK) == 0)
 				return (candidate_path);
-			else
-				free (candidate_path);
+			free(candidate_path);
 		}
 		else if (seg_len > 0)
 		{
-			candidate_path = malloc((cmd_len + seg_len + 2);
+			candidate_path = malloc(cmd_len + seg_len + 2);
 			if (candidate_path == NULL)
 				return (NULL);
 			for (i = 0; i < seg_len; i++)
@@ -55,8 +121,7 @@ char *find_in_path(const char *cmd, char *path_env)
 
 			if (access(candidate_path, X_OK) == 0)
 				return (candidate_path);
-			else
-				free (candidate_path);
+			free(candidate_path);
 		}
 		if (*seg_current == ':')
 		{
@@ -66,5 +131,4 @@ char *find_in_path(const char *cmd, char *path_env)
 			break;
 	}
 	return (NULL);
-}	
-	
+}
