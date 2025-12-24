@@ -7,7 +7,7 @@ char *_getenv(const char *name);
 void print_path_dirs(void);
 
 /**
- * main - prints each directory from 
+ * main - prints each directory from
  * the PATH environment variable
  *
  * Return: 0 on success
@@ -51,7 +51,7 @@ char *_getenv(const char *name)
 }
 
 /**
- * print_path_dirs - prints each directory 
+ * print_path_dirs - prints each directory
  * contained in PATH, one per line
  *
  * Return: Nothing
@@ -65,7 +65,7 @@ void print_path_dirs(void)
 	path_dir = _getenv("PATH");
 
 	if (path_dir == NULL || path_dir[0] == '\0')
-		return ;
+		return;
 
 	seg_start = path_dir;
 	seg_current = path_dir;
