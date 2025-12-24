@@ -1,37 +1,21 @@
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
+#include <unistd.h>
 
 extern char **environ;
 char *_getenv(const char *name);
+void print_path_dirs(void);
 
 /**
- * main - tests _getenv by printing a few environment variables
+ * main - prints each directory from 
+ * the PATH environment variable
  *
  * Return: 0 on success
  */
 
 int main(void)
 {
-	char *path = _getenv("PATH");
-	char *home = _getenv("HOME");
-	char *user = _getenv("USER");
-
-	if (path)
-		printf("PATH = %s\n", path);
-	else
-		printf("PATH n'existe pas\n");
-
-	if (home)
-		printf("HOME = %s\n", home);
-	else
-		printf("HOME n'existe pas\n");
-
-	if (user)
-		printf("USER = %s\n", user);
-	else
-		printf("USER n'existe pas\n");
-
+	print_path_dirs();
 	return (0);
 }
 
@@ -64,4 +48,46 @@ char *_getenv(const char *name)
 	}
 	/* Variable d'environnement non trouvée */
 	return (NULL);
+}
+
+/**
+ * print_path_dirs - prints each directory 
+ * contained in PATH, one per line
+ *
+ * Return: Nothing
+ */
+
+void print_path_dirs(void)
+{
+	char *path_dir;
+	const char *seg_start, *seg_current, *p;
+
+	path_dir = _getenv("PATH");
+
+	if (path_dir == NULL || path_dir[0] == '\0')
+		return ;
+
+	seg_start = path_dir;
+	seg_current = path_dir;
+
+	while (1)
+	{
+		if (*seg_current == ':' || *seg_current == '\0')
+		{
+			if (seg_current == seg_start)
+			{
+				write(1, ".", 1);
+
+			} else
+			{
+				for (p = seg_start; p < seg_current; p++)
+					write(1, p, 1);
+			}
+			write(1, "\n", 1);
+			seg_start = seg_current + 1;
+			if (*seg_current == '\0')
+				break;
+		}
+		seg_current++;
+	}
 }
