@@ -6,6 +6,17 @@
 extern char **environ;
 int _setenv(const char *name, const char *value, int overwrite);
 
+/**
+ * cleanup_env - Frees the current environment array and its strings.
+ *
+ * Description: Iterates over `environ`,
+ * frees each "NAME=VALUE" string,
+ * then frees the `environ` array itself
+ * and sets `environ` to NULL.
+ *
+ * Return: Void.
+ */
+
 static void cleanup_env(void)
 {
 	size_t i;
@@ -19,6 +30,13 @@ static void cleanup_env(void)
 	free(environ);
 	environ = NULL;
 }
+
+/**
+ * main - Tests the custom _setenv implementation
+ * with different overwrite modes.
+ *
+ * Return: 0 on success.
+ */
 
 int main(void)
 {
@@ -46,5 +64,5 @@ int main(void)
 	/* Valgrind cleanup */
 	cleanup_env();
 
-	return 0;
+	return (0);
 }
