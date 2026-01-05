@@ -8,11 +8,14 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+/* Nombre maximum d'arguments supportés (argv) */
 #define MAX_ARGS 64
+/* Taille maximum pour construire un chemin complet de commande */
 #define MAX_PATH 1024
+/* Texte affiché comme prompt en mode interactif */
 #define PROMPT "test "
 
 char *get_path(void);
 char *find_command(char *command);
 
-#endif 
+#endif
