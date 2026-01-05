@@ -10,7 +10,7 @@
 
 #define MAX_ARGS 1024
 #define MAX_PATH 4096
-#define PROMPT "-_- "
+#define PROMPT "-_- \\_(ツ)_/ "
 
 /* Structure pour les built-ins */
 typedef struct
