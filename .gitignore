@@ -1,0 +1,23 @@
+# Binaries / executables
+hsh
+a.out
+*.out
+*.exe
+
+# Objects
+*.o
+*.a
+*.so
+
+# Debug / profiling
+gmon.out
+vgcore.*
+core
+core.*
+
+# Editor / OS junk
+*.swp
+*.swo
+*~
+.DS_Store
+.vscode/
