@@ -1,23 +1,78 @@
-# Binaries / executables
-hsh
+# =========================================================
+# C / simple_shell-training - .gitignore
+# =========================================================
+
+# ---------- Compiled objects / libs ----------
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+
+# ---------- Executables ----------
 a.out
 *.out
 *.exe
 
-# Objects
-*.o
-*.a
-*.so
-
-# Debug / profiling
-gmon.out
+# (Linux/macOS) common debug outputs
+*.dSYM/
 vgcore.*
 core
 core.*
 
-# Editor / OS junk
+# ---------- Your training binaries (root) ----------
+av
+ls_tmp_fork
+pid
+ppid
+pid_max
+print_env
+print_environ
+print_path
+printenv
+read_line
+strtok
+shell
+hsh
+
+# ---------- Training binaries inside subfolders ----------
+simple_shell_v_00.1/pid
+simple_shell_v_00.1/ppid
+simple_shell_v_00.1/shell
+simple_shell_v_00.2/pid
+simple_shell_v_00.2/ppid
+simple_shell_v_00.2/shell
+
+# If you sometimes compile inside versions:
+simple_shell_v1/shell
+simple_shell_v2/shell
+simple_shell_v3/shell
+simple_shell_v4/shell
+simple_shell_V5/shell
+simple_shell_v6/hsh
+simple_shell_v6/shell
+
+# ---------- Editor / IDE ----------
+.vscode/
+*.code-workspace
+.idea/
+*.iml
+
+# ---------- OS / misc ----------
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Windows "Mark of the Web" downloaded-file metadata
+*:Zone.Identifier
+
+# ---------- Temporary / backup ----------
+*~
 *.swp
 *.swo
-*~
-.DS_Store
-.vscode/
+*.tmp
+
+# ---------- Optional: build directories ----------
+build/
+bin/
+obj/
