@@ -1,4 +1,4 @@
-
+![Project banner](./assets/banner.png)
 
 # Simple Shell Training 🐚
 
