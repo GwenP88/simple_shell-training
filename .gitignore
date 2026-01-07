@@ -34,6 +34,11 @@ read_line
 strtok
 shell
 hsh
+_getenv
+_setenv
+_unsetenv
+_which
+path_linked_list
 
 # ---------- Training binaries inside subfolders ----------
 simple_shell_v_00.1/pid
