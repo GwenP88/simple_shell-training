@@ -1,0 +1,114 @@
+.TH SIMPLE_SHELL 1 "December 2024" "Version 1.0" "Simple Shell Manual"
+
+.SH NAME
+simple_shell \- a simple UNIX command line interpreter
+
+.SH SYNOPSIS
+.B simple_shell
+.RI [ command_file ]
+
+.SH DESCRIPTION
+.B simple_shell
+is a basic UNIX command line interpreter written in C.
+It reads commands from standard input or from a file, parses them,
+and executes them by searching for executables in the directories
+listed in the PATH environment variable.
+
+The shell supports both interactive and non-interactive modes,
+built-in commands, and execution of external programs using
+system calls such as fork, execve, and wait.
+
+.SH INVOCATION
+.B simple_shell
+can be invoked in two different modes.
+
+.SS Interactive Mode
+When standard input is connected to a terminal, the shell runs in
+interactive mode. A prompt is displayed, and the shell waits for
+the user to type commands.
+
+Example:
+.PP
+.nf
+$ ./simple_shell
+-_- \_(ツ)_/ $ ls
+-_- \_(ツ)_/ $ exit
+.fi
+
+.SS Non-Interactive Mode
+When standard input is not connected to a terminal, the shell reads
+commands from standard input without displaying a prompt.
+
+Example:
+.PP
+.nf
+$ echo "ls -l" | ./simple_shell
+.fi
+
+.SH BUILT-IN COMMANDS
+The following built-in commands are implemented:
+
+.TP
+.B env
+Prints the current environment variables.
+
+.TP
+.B exit
+Exits the shell.
+
+.TP
+.B cd
+Changes the current working directory.
+(Current implementation is minimal.)
+
+.SH COMMAND EXECUTION
+If the command entered is not a built-in, the shell searches for the
+command in the directories listed in the PATH environment variable.
+If the executable is found and has execute permission, it is executed
+in a child process.
+
+If the command cannot be found, an error message is printed and
+the shell returns status 127.
+
+.SH RETURN VALUE
+The shell returns the exit status of the last executed command.
+If an error occurs during execution, an appropriate non-zero
+status is returned.
+
+.SH ENVIRONMENT
+The shell uses the following environment variables:
+
+.TP
+.B PATH
+Specifies the directories where executable programs are searched.
+
+.SH ERRORS
+If a command is not found, the shell prints an error message to
+standard error in the following format:
+
+.PP
+.nf
+program_name: line_number: command: not found
+.fi
+
+.SH FILES
+None.
+
+.SH LIMITATIONS
+This shell does not support:
+- Command chaining
+- Pipes
+- Redirections
+- Wildcards
+- Command history
+
+.SH AUTHORS
+Developed by:
+.TP
+.BR \- \ \fIhttps://github.com/hugou74130\fR
+.TP
+.BR \- \ \fIhttps://github.com/GwenP88\fR
+
+.SH SEE ALSO
+.BR sh (1),
+.BR bash (1)
